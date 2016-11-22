@@ -1,14 +1,44 @@
-
 $(document).ready( function() {
+  $(document).keydown(function(ev) {
+    console.log("key down", ev.key);
+    playNoteFunc(ev.key)();
+  });
 
-  $('.body').click(function(event){
-    // $('#cAudio').click(function(event){
-    //   document.getElementsByTagName("cAudio").play();
-    // });
+  var playNoteFunc = function(note){
+    var audioElementID = '#' + note + "Audio";
+
+    var audioElement = $(audioElementID)[0];
+
+    return function() {
+      if (!audioElement) {
+        return;
+      }
+
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      audioElement.play();
+    }
+  };
+
+  [
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'a',
+    'b'
+  ].forEach(function(note) {
+    var uiElementClass = '.note.' + note;
+
+    $(uiElementClass).click(playNoteFunc(note));
+  });
+
+
     // $('#dAudio').click(function(event){
     //   document.getElementsByTagName("dAudio").play();
     // });
-  });
+
 
 
 });
