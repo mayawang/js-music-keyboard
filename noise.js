@@ -6,14 +6,11 @@ $(document).ready( function() {
 
   var playNoteFunc = function(note){
     var audioElementID = '#' + note + "Audio";
-
     var audioElement = $(audioElementID)[0];
-
     return function() {
       if (!audioElement) {
         return;
       }
-
       audioElement.pause();
       audioElement.currentTime = 0;
       audioElement.play();
@@ -30,15 +27,7 @@ $(document).ready( function() {
     'b'
   ].forEach(function(note) {
     var uiElementClass = '.note.' + note;
-
     $(uiElementClass).click(playNoteFunc(note));
   });
-
-
-    // $('#dAudio').click(function(event){
-    //   document.getElementsByTagName("dAudio").play();
-    // });
-
-
 
 });
